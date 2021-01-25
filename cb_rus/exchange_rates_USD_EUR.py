@@ -6,7 +6,7 @@ page = r.text
 # res_eur = re.search(r'EUR.+(\d\d,\d+).+(\d\d,\d+)', page, re.DOTALL)
 # print(f'Euro on tomorrow: {res_eur.group(2)} P')
 
-res_eur_usd = re.search(r'USD.*(\d\d,\d+).+(\d\d,\d+).+(\d\d,\d+).+(\d\d,\d+)',
+res_eur_usd = re.search(r'USD.*(\d{2},\d{4}).+(\d{2},\d{4}).+(\d{2},\d{4}).+(\d{2},\d{4})',
                         page, re.DOTALL)
 
 print(f'USD on tomorrow: {res_eur_usd.group(2)} P\n'

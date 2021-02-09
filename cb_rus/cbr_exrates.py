@@ -10,13 +10,16 @@ def daily_exrates():
     page.encoding = 'windows-1251'
     return page.text
 
-def bs4_valute(text):
+def bs4_valutes(text):
     bs4_content = BeautifulSoup(text, 'lxml')
     return bs4_content.find_all("valute")
+
+def print_table(bs4_content):
+    pass
 
 
 if __name__ == '__main__':
     result = daily_exrates()
     pprint(result)
     print(f"Type is: {type(result)}")
-    print(bs4_valute(result).prettify())
+    print(bs4_valutes(result).prettify())

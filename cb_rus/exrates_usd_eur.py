@@ -2,6 +2,7 @@ import requests
 import re
 
 def usdeur():
+    """Returns re object, goups of found values of exchange rates of usd and euro""" 
     r = requests.get('https://cbr.ru')
     page = r.text
     # res_eur = re.search(r'EUR.+(\d\d,\d+).+(\d\d,\d+)', page, re.DOTALL)

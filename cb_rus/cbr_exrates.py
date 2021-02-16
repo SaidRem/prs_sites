@@ -28,16 +28,19 @@ def print_table():
     (For data see bs4_valutes())
     """
     valutes_list = bs4_valutes(daily_exrates())
-    print('|{: ^44s}|{: ^20s}|{: ^20s}|{: ^20s}|'.format('Currency name',
+    print('|{: ^44s}|{: ^20s}|{: ^20s}|{: ^20s}|{: ^20s}|'.format('Currency name',
                                                          'Charcode',
                                                          'Nominal',
-                                                         'Value'))
-    print('-' * 109)
+                                                         'Value',
+                                                         'Value / Nominal'))
+    print('-' * 130)
     for row in sorted(valutes_list, key=lambda x: x.find('name').text):
-        print('| {: <43s}|{: ^20s}|{: ^20s}|{: ^20s}|'.format(row.find('name').text,
-                                                              row.find('charcode').text,
-                                                              row.find('nominal').text,
-                                                              row.find('value').text))
+        print('| {: <43s}|{: ^20s}|{: ^20s}|{: ^20s}|{: ^20.4f}|'.format(row.find('name').text,
+                                                                  row.find('charcode').text,
+                                                                  row.find('nominal').text,
+                                                                  row.find('value').text,
+                                                                  (float(row.find('value').text.replace(',', '.'))
+                                                                  / int(row.find('nominal').text))))
 
 
 if __name__ == '__main__':

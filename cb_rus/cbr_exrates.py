@@ -1,4 +1,6 @@
+import os
 import requests
+from datetime import datetime
 from bs4 import BeautifulSoup
 import re
 from pprint import pprint
@@ -21,26 +23,42 @@ def bs4_valutes(text, pretty=False):
     if pretty: print(bs4_content.prettify())
     return result
 
-def print_table():
+def print_table(f=None):
     """
     The function prints all currencies in table with columns:
     Currency name, Charcode, Nominal, Valute.
     (For data see bs4_valutes())
     """
+            
     valutes_list = bs4_valutes(daily_exrates())
     print('|{: ^44s}|{: ^20s}|{: ^20s}|{: ^20s}|{: ^20s}|'.format('Currency name',
                                                          'Charcode',
                                                          'Nominal',
                                                          'Value',
-                                                         'Value / Nominal'))
-    print('-' * 130)
+                                                         'Value / Nominal'), file=f)
+    print('-' * 130, file=f)
     for row in sorted(valutes_list, key=lambda x: x.find('name').text):
         print('| {: <43s}|{: ^20s}|{: ^20s}|{: ^20s}|{: ^20.4f}|'.format(row.find('name').text,
                                                                   row.find('charcode').text,
                                                                   row.find('nominal').text,
                                                                   row.find('value').text,
-                                                                  (float(row.find('value').text.replace(',', '.'))
-                                                                  / int(row.find('nominal').text))))
+                                                                  (float(row.find('value').text.replace(',', '.'))/
+                                                                   int(row.find('nominal').text))), file=f)
+
+def write_table(file_name):
+    """ Writes table of currencies to a file """
+    
+    date_now = datetime.now().strftime('Date: %d/%m/%Y\r\nTime: %H:%M')
+    if os.path.isfile(file_name):
+        with open(file_name, 'a', encoding='utf-8') as f:
+            print('\r\n\r\n' + '-'*130, file=f)
+            print(date_now, file=f)
+            print_table(f)
+    else:
+        with open(file_name, 'w', encoding='utf-8') as f:
+            print('\r\n\r\n', file=f)
+            print(date_now, file=f)
+            print_table(f)
 
 
 if __name__ == '__main__':
@@ -48,4 +66,5 @@ if __name__ == '__main__':
     # pprint(result)
     # print(f"Type is: {type(result)}")
     # print(bs4_valutes(result), True)
-    print_table()
+    # print_table()
+    write_table('test.txt')

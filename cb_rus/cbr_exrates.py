@@ -46,7 +46,10 @@ def print_table(f=None):
                                                                    int(row.find('nominal').text))), file=f)
 
 def write_table(file_name):
-    """ Writes table of currencies to a file """
+    """ 
+    Writes table of currencies to a file, name one specified
+    in the function argument.    
+    """
     
     date_now = datetime.now().strftime('Date: %d/%m/%Y\r\nTime: %H:%M')
     if os.path.isfile(file_name):
@@ -59,6 +62,12 @@ def write_table(file_name):
             print('\r\n\r\n', file=f)
             print(date_now, file=f)
             print_table(f)
+
+def list_of_cur():
+    """
+    Returns list of currencies.
+    """
+    pass
 
 
 if __name__ == '__main__':

@@ -70,6 +70,13 @@ def list_of_cur():
     pass
 
 
+def pretty_file():
+    """
+    Writing a page structure to a file.
+    """
+    pass
+
+
 if __name__ == '__main__':
     # result = daily_exrates()
     # pprint(result)

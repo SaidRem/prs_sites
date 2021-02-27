@@ -17,10 +17,12 @@ def bs4_valutes(text, pretty=False):
     """
     Finds all content between tag <valute> in xml file.
     Returns bs4 object.
+    If pretty arg specified returns prettified page.
     """
     bs4_content = BeautifulSoup(text, 'lxml')
     result = bs4_content.find_all("valute")
-    if pretty: print(bs4_content.prettify())
+    if pretty: 
+        return bs4_content.prettify()
     return result
 
 def print_table(f=None):
@@ -63,6 +65,7 @@ def write_table(file_name):
             print(date_now, file=f)
             print_table(f)
 
+
 def list_of_cur():
     """
     Returns list of currencies.
@@ -70,11 +73,12 @@ def list_of_cur():
     pass
 
 
-def pretty_file():
+def pretty_page(file_name):
     """
-    Writing a page structure to a file.
+    Write a page structure to a file.
     """
-    pass
+    with open(file_name, 'w', encoding='utf-8') as f:
+        print(bs4_valutes(daily_exrates(), pretty=True), file=f)
 
 
 if __name__ == '__main__':
@@ -83,4 +87,5 @@ if __name__ == '__main__':
     # print(f"Type is: {type(result)}")
     # print(bs4_valutes(result), True)
     # print_table()
-    write_table('test.txt')
+    # write_table('test.txt')
+    pretty_page('test.txt')

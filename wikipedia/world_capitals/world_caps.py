@@ -30,6 +30,26 @@ def asia_dict():
         asia['Asia'][name.find_all('a')[-2].text] = name.find_all('a')[-1].text
     return asia
 
+def african_dict():
+    """
+    Returns dictionary with capitals of the African continent.
+    """
+    africa = dict.fromkeys(['Africa'], {})
+    all_tr = soup.body.find_all('tbody')[2].find_all('tr')[1:-2]
+    for name in all_tr:
+        africa['Africa'][name.find_all('a')[-2].text] = name.find_all('a')[-1].text
+    return africa
+
+def america_dict():
+    """
+    Returns dictionary with capitals of the American continent.
+    """
+    america = dict.fromkeys(['America'], {})
+    all_tr = soup.body.find_all('tbody')[3].find_all('tr')[1:]
+    for name in all_tr:
+        america['America'][name.find_all('a')[-2].text] = name.find_all('a')[-1].text
+    return america
+
 # print(europe)
 
 # TODO 

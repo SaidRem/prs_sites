@@ -51,14 +51,23 @@ def america_dict():
         america['America'][name.find_all('a')[-2].text] = name.find_all('a')[-1].text
     return america
 
-# print(europe)
+def australia_dict():
+    australia = dict.fromkeys(['Australia'], {})
+    all_tr = all_tbody[4].find_all('tr')[1:-1]
+    for name in all_tr:
+        australia['Australia'][name.find_all('a')[-2].text] = name.find_all('a')[-1].text
+    return australia
 
-# TODO 
-# Asia, Africa, America, Australia and Oceania
 
 if __name__ == '__main__':
     europe = europe_dict()
     asia = asia_dict()
+    africa = african_dict()
+    america = america_dict()
+    australia = australia_dict()
     with open('countries_cap.py', 'w', encoding='utf-8') as f:
-        f.write('europe = ' + pprint.pformat(europe) + '\n')
-        f.write('asia = ' + pprint.pformat(asia) + '\n')
+        f.write('europe = ' + pprint.pformat(europe) + '\n\n')
+        f.write('asia = ' + pprint.pformat(asia) + '\n\n')
+        f.write('africa = ' + pprint.pformat(africa) + '\n\n')
+        f.write('america = ' + pprint.pformat(america) + '\n\n')
+        f.write('australia = ' + pprint.pformat(australia) + '\n\n')

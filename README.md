@@ -1,3 +1,3 @@
 # prs_sites
-In this folder added some scripts that retrievs information
+In this folder added some scripts that retrieves information
 from various sites

@@ -86,6 +86,6 @@ if __name__ == '__main__':
     # pprint(result)
     # print(f"Type is: {type(result)}")
     # print(bs4_valutes(result), True)
-    # print_table()
+    print_table()
     # write_table('test.txt')
-    pretty_page('test.txt')
+    # pretty_page('test.txt')
